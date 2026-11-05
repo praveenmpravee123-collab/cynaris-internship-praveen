@@ -1,0 +1,91 @@
+dataContractSpecification: 0.9.3
+
+id: supermarket-sales-v1
+
+info:
+  title: Supermarket Sales Data Contract
+  owner: Data Engineering
+  consumer: BI Dashboard Team
+  description: Data quality contract for supermarket sales analysis
+  sla: "Historical dataset: January to March 2019. Refresh schedule not provided."
+
+models:
+  supermarket_sales:
+    fields:
+      Invoice ID:
+        type: string
+        required: true
+        unique: true
+        classification: internal
+
+      Branch:
+        type: string
+        required: true
+
+      City:
+        type: string
+        required: true
+
+      Customer type:
+        type: string
+        required: true
+        allowed_values:
+          - Member
+          - Normal
+
+      Gender:
+        type: string
+        required: true
+
+      Product line:
+        type: string
+        required: true
+
+      Unit price:
+        type: number
+        required: true
+        minimum: 0
+
+      Quantity:
+        type: integer
+        required: true
+        minimum: 1
+
+      Sales:
+        type: number
+        required: true
+        minimum: 0
+
+      Date:
+        type: string
+        required: true
+        format: MM/DD/YYYY
+
+      Payment:
+        type: string
+        required: true
+        allowed_values:
+          - Cash
+          - Ewallet
+          - Credit card
+
+      Rating:
+        type: number
+        required: true
+        minimum: 0
+        maximum: 10
+
+quality:
+  uniqueness:
+    - Invoice ID
+  completeness:
+    required_fields: all
+  validation:
+    - Quantity must be at least 1
+    - Unit price must be positive
+    - Sales must be positive
+    - Rating must be between 0 and 10
+
+privacy:
+  pii_columns: []
+  masking_strategy: "No direct personal identifiers identified in the available columns."
