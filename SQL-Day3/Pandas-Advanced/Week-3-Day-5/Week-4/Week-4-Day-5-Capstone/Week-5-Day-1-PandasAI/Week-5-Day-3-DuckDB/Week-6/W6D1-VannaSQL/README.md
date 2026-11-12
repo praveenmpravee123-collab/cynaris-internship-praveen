@@ -67,16 +67,33 @@ http://127.0.0.1:8000/docs
 
 ## API Testing
 
-The API was tested using Swagger UI.
+The FastAPI endpoint was tested successfully using Swagger UI.
 
-Three API interactions were successfully tested:
+**Endpoint:** POST `/cia/sql-analyst`
 
-1. Average monthly salary across all job records.
-2. Top 5 states by number of job records.
-3. Top 5 most common job titles.
+**API Documentation:** http://127.0.0.1:8000/docs
 
-All three requests returned HTTP 200 responses.
+### Test Results
+
+1. Top 5 states by job listings:
+   - Kerala: 19,384
+   - Tamil Nadu: 17,770
+   - Karnataka: 12,729
+   - Remote: 10,718
+   - Maharashtra: 9,302
+
+2. Average monthly salary: ₹63,112.36
+
+3. Empty question validation:
+   - HTTP 400
+   - Error: Question cannot be empty
+
+Both valid requests returned HTTP 200 responses.
+
+### Evidence
+
+Screenshots are available in the `evidence/` folder.
 
 ## Project Status
 
-Vanna AI Text-to-SQL integration and FastAPI endpoint testing completed.
+Vanna AI Text-to-SQL integration, SQL testing, FastAPI endpoint implementation, API testing, and validation completed.
