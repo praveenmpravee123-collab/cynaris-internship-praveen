@@ -56,3 +56,10 @@ All seven chart screenshots are saved in the evidence folder.
 
 Successfully created interactive visualizations using
 Plotly and ECharts for monthly revenue analysis.
+
+### Testing and Validation
+
+- Successfully executed all Plotly chart cells.
+- Verified ECharts visualizations in the web browser.
+- Captured seven chart screenshots as project evidence.
+- Verified project files and folder structure.
