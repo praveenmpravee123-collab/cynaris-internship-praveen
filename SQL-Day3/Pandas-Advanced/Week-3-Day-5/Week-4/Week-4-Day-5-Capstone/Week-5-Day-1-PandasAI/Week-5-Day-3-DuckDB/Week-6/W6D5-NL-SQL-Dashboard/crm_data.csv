@@ -1,0 +1,101 @@
+customer_id,customer_name,company,lead_source,sales_rep,deal_value,deal_stage,status,created_date,last_activity
+CUST0001,Rohan Reddy,Keystone Digital,Trade Show,Priya Shah,155000,New Lead,Active,2026-10-17,2026-10-20
+CUST0002,Kiran Joshi,Aster Technologies,Cold Call,Rahul Menon,160000,New Lead,Active,2025-03-31,2026-06-06
+CUST0003,Aarav Nair,Lumina Healthcare,Email Campaign,Sneha Iyer,190000,Qualified,Active,2026-10-28,2026-11-14
+CUST0004,Ishaan Menon,BluePeak Solutions,LinkedIn,Sneha Iyer,80000,Qualified,Inactive,2025-10-12,2025-12-30
+CUST0005,Meera Menon,BluePeak Solutions,Cold Call,Sneha Iyer,355000,Won,Inactive,2026-09-11,2026-10-14
+CUST0006,Ishaan Sharma,Keystone Digital,Referral,Sneha Iyer,135000,Won,Active,2026-10-06,2026-11-14
+CUST0007,Kavya Nair,FinEdge Services,LinkedIn,Rahul Menon,305000,Won,Active,2025-03-23,2025-11-16
+CUST0008,Ananya Das,Lumina Healthcare,Referral,Rahul Menon,400000,Lost,Active,2025-10-01,2026-09-25
+CUST0009,Pooja Iyer,Keystone Digital,LinkedIn,Aditi Rao,455000,Qualified,Follow-up Required,2026-04-19,2026-07-25
+CUST0010,Ishaan Iyer,Orchid Networks,Cold Call,Arjun Das,185000,New Lead,Active,2025-08-23,2026-10-17
+CUST0011,Reyansh Nair,Evergreen Foods,Referral,Rahul Menon,425000,Negotiation,Active,2025-11-19,2026-03-07
+CUST0012,Aditya Rao,DeltaWorks,Referral,Priya Shah,385000,Qualified,Active,2026-07-29,2026-10-05
+CUST0013,Ananya Menon,Jupiter Labs,Website,Karthik Nair,110000,Won,Follow-up Required,2026-05-21,2026-06-13
+CUST0014,Meera Das,MetroMart,LinkedIn,Arjun Das,20000,Proposal,Follow-up Required,2026-01-26,2026-09-22
+CUST0015,Arjun Das,MetroMart,Referral,Priya Shah,15000,Qualified,Active,2025-12-15,2026-02-10
+CUST0016,Rohan Rao,MetroMart,Referral,Priya Shah,140000,Won,Active,2025-04-19,2026-02-18
+CUST0017,Kavya Patel,DeltaWorks,Website,Rahul Menon,85000,Proposal,Active,2026-06-28,2026-06-28
+CUST0018,Pooja Nair,Crestline Retail,Trade Show,Karthik Nair,55000,New Lead,Active,2026-08-04,2026-08-14
+CUST0019,Kabir Das,MetroMart,Trade Show,Arjun Das,285000,Qualified,Follow-up Required,2026-07-17,2026-08-07
+CUST0020,Kavya Kapoor,Orchid Networks,Cold Call,Karthik Nair,430000,Qualified,Follow-up Required,2025-07-25,2026-07-25
+CUST0021,Pooja Iyer,Jupiter Labs,Referral,Aditi Rao,390000,Qualified,Active,2025-05-04,2026-01-12
+CUST0022,Ishaan Das,DeltaWorks,LinkedIn,Arjun Das,225000,Qualified,Follow-up Required,2025-03-14,2025-05-13
+CUST0023,Dev Kapoor,DeltaWorks,Email Campaign,Karthik Nair,380000,Proposal,Inactive,2026-05-13,2026-07-06
+CUST0024,Tara Kapoor,Northstar Analytics,Trade Show,Aditi Rao,285000,New Lead,Active,2025-07-14,2025-08-31
+CUST0025,Meera Iyer,DeltaWorks,Referral,Priya Shah,230000,New Lead,Active,2026-11-01,2026-11-11
+CUST0026,Ishaan Kapoor,MetroMart,Cold Call,Aditi Rao,170000,Proposal,Active,2026-04-05,2026-05-10
+CUST0027,Saanvi Nair,GreenLeaf Systems,Email Campaign,Karthik Nair,495000,Won,Follow-up Required,2025-02-21,2026-08-28
+CUST0028,Aarav Menon,Evergreen Foods,Email Campaign,Sneha Iyer,255000,Qualified,Active,2025-08-07,2026-10-23
+CUST0029,Ira Nair,DeltaWorks,LinkedIn,Rahul Menon,370000,Lost,Follow-up Required,2026-03-10,2026-09-04
+CUST0030,Diya Sharma,Jupiter Labs,Email Campaign,Priya Shah,215000,Negotiation,Active,2025-03-01,2026-10-15
+CUST0031,Ishaan Joshi,BluePeak Solutions,Trade Show,Rahul Menon,130000,New Lead,Active,2026-06-28,2026-08-07
+CUST0032,Maya Sharma,Jupiter Labs,Website,Karthik Nair,385000,Lost,Active,2026-02-18,2026-04-20
+CUST0033,Kabir Rao,DeltaWorks,LinkedIn,Karthik Nair,180000,Proposal,Active,2026-11-05,2026-11-14
+CUST0034,Aarav Kapoor,Jupiter Labs,Cold Call,Aditi Rao,60000,Proposal,Follow-up Required,2025-05-15,2026-03-18
+CUST0035,Ishaan Iyer,FinEdge Services,LinkedIn,Rahul Menon,235000,Qualified,Active,2025-03-17,2026-09-18
+CUST0036,Kiran Sharma,Keystone Digital,Cold Call,Sneha Iyer,430000,Proposal,Active,2026-03-25,2026-10-24
+CUST0037,Meera Das,Crestline Retail,LinkedIn,Sneha Iyer,85000,Lost,Active,2026-11-11,2026-11-11
+CUST0038,Arjun Das,Horizon Mobility,LinkedIn,Aditi Rao,420000,Negotiation,Active,2026-09-12,2026-10-08
+CUST0039,Rohan Patel,Crestline Retail,Trade Show,Karthik Nair,225000,Won,Active,2025-04-05,2026-06-12
+CUST0040,Rohan Das,Aster Technologies,LinkedIn,Priya Shah,60000,Proposal,Active,2026-07-19,2026-10-17
+CUST0041,Diya Rao,DeltaWorks,Trade Show,Rahul Menon,245000,Proposal,Active,2026-07-20,2026-08-07
+CUST0042,Maya Nair,Orchid Networks,Referral,Rahul Menon,275000,Won,Follow-up Required,2025-04-16,2026-04-13
+CUST0043,Tara Iyer,Evergreen Foods,Referral,Arjun Das,225000,Qualified,Active,2025-07-01,2026-09-25
+CUST0044,Kabir Kapoor,FinEdge Services,LinkedIn,Rahul Menon,155000,Won,Follow-up Required,2025-04-21,2026-05-17
+CUST0045,Ishaan Patel,FinEdge Services,Trade Show,Priya Shah,190000,Negotiation,Active,2025-08-17,2025-08-29
+CUST0046,Ananya Joshi,Evergreen Foods,Website,Aditi Rao,180000,Qualified,Active,2026-02-14,2026-11-15
+CUST0047,Maya Das,BluePeak Solutions,Email Campaign,Priya Shah,290000,Qualified,Inactive,2026-09-03,2026-10-28
+CUST0048,Pooja Iyer,FinEdge Services,Email Campaign,Aditi Rao,345000,New Lead,Active,2025-07-14,2025-11-21
+CUST0049,Nisha Das,Evergreen Foods,Trade Show,Karthik Nair,90000,Negotiation,Inactive,2026-11-12,2026-11-14
+CUST0050,Tara Menon,Keystone Digital,Trade Show,Rahul Menon,135000,Negotiation,Active,2025-12-01,2026-06-25
+CUST0051,Nisha Patel,DeltaWorks,Email Campaign,Priya Shah,15000,Qualified,Active,2026-09-23,2026-10-29
+CUST0052,Kabir Das,Horizon Mobility,Trade Show,Rahul Menon,445000,Qualified,Active,2026-09-14,2026-10-25
+CUST0053,Vivaan Reddy,Northstar Analytics,Referral,Arjun Das,410000,Qualified,Inactive,2026-11-06,2026-11-07
+CUST0054,Saanvi Kapoor,Jupiter Labs,Website,Karthik Nair,40000,Won,Active,2025-11-14,2026-03-09
+CUST0055,Saanvi Nair,Keystone Digital,Trade Show,Aditi Rao,270000,Negotiation,Active,2026-03-01,2026-06-08
+CUST0056,Kiran Kapoor,Aster Technologies,Cold Call,Rahul Menon,460000,Qualified,Follow-up Required,2025-04-20,2026-06-29
+CUST0057,Pooja Joshi,FinEdge Services,Email Campaign,Priya Shah,350000,New Lead,Active,2025-05-05,2026-08-15
+CUST0058,Ira Kapoor,Evergreen Foods,Referral,Arjun Das,115000,Won,Active,2026-06-01,2026-09-18
+CUST0059,Arjun Kapoor,BluePeak Solutions,Trade Show,Sneha Iyer,165000,Won,Active,2025-10-11,2026-11-07
+CUST0060,Rohan Nair,DeltaWorks,Email Campaign,Arjun Das,65000,Qualified,Follow-up Required,2025-08-29,2026-01-15
+CUST0061,Reyansh Menon,Aster Technologies,Referral,Karthik Nair,360000,New Lead,Active,2025-06-06,2026-01-11
+CUST0062,Ira Sharma,FinEdge Services,LinkedIn,Karthik Nair,255000,Won,Inactive,2026-02-03,2026-02-13
+CUST0063,Saanvi Kapoor,DeltaWorks,LinkedIn,Karthik Nair,400000,Negotiation,Active,2026-03-06,2026-07-21
+CUST0064,Ananya Kapoor,Orchid Networks,Referral,Priya Shah,270000,Qualified,Inactive,2026-05-13,2026-05-20
+CUST0065,Aarav Reddy,Keystone Digital,Email Campaign,Rahul Menon,435000,Lost,Active,2026-07-01,2026-07-07
+CUST0066,Reyansh Rao,FinEdge Services,Email Campaign,Sneha Iyer,150000,New Lead,Active,2026-04-18,2026-06-03
+CUST0067,Pooja Sharma,FinEdge Services,Referral,Arjun Das,490000,Won,Active,2026-03-08,2026-05-11
+CUST0068,Aarav Joshi,Crestline Retail,Referral,Rahul Menon,140000,Won,Follow-up Required,2025-03-12,2025-04-22
+CUST0069,Arjun Rao,Crestline Retail,Cold Call,Priya Shah,310000,New Lead,Follow-up Required,2026-04-30,2026-10-18
+CUST0070,Nisha Joshi,Keystone Digital,Email Campaign,Karthik Nair,30000,Lost,Active,2025-04-28,2025-10-12
+CUST0071,Meera Patel,Northstar Analytics,Trade Show,Priya Shah,170000,Proposal,Follow-up Required,2025-07-23,2025-08-30
+CUST0072,Ishaan Das,Keystone Digital,LinkedIn,Aditi Rao,250000,Qualified,Active,2025-05-04,2025-06-15
+CUST0073,Reyansh Nair,GreenLeaf Systems,Referral,Arjun Das,245000,Proposal,Active,2026-03-07,2026-10-03
+CUST0074,Reyansh Menon,Northstar Analytics,Trade Show,Priya Shah,320000,Negotiation,Follow-up Required,2026-06-19,2026-08-27
+CUST0075,Arjun Kapoor,DeltaWorks,Email Campaign,Priya Shah,70000,Won,Follow-up Required,2025-10-02,2026-03-16
+CUST0076,Ananya Kapoor,DeltaWorks,LinkedIn,Sneha Iyer,220000,Qualified,Active,2026-09-17,2026-10-29
+CUST0077,Pooja Sharma,Indigo Logistics,Referral,Aditi Rao,190000,Won,Inactive,2025-12-15,2026-05-07
+CUST0078,Ira Kapoor,Horizon Mobility,Website,Aditi Rao,165000,Qualified,Active,2025-09-05,2026-09-08
+CUST0079,Dev Rao,Horizon Mobility,Cold Call,Priya Shah,435000,Qualified,Active,2025-10-29,2026-02-19
+CUST0080,Reyansh Patel,Evergreen Foods,LinkedIn,Rahul Menon,240000,Lost,Active,2025-12-19,2026-07-24
+CUST0081,Ananya Iyer,DeltaWorks,Trade Show,Karthik Nair,500000,Qualified,Inactive,2025-05-04,2025-11-17
+CUST0082,Nisha Reddy,Northstar Analytics,Referral,Sneha Iyer,395000,Proposal,Inactive,2025-10-11,2026-10-16
+CUST0083,Rohan Patel,Aster Technologies,Website,Priya Shah,355000,New Lead,Active,2025-08-21,2026-02-21
+CUST0084,Ira Reddy,Northstar Analytics,Website,Priya Shah,495000,Lost,Active,2025-10-27,2026-10-19
+CUST0085,Arjun Kapoor,BluePeak Solutions,Website,Karthik Nair,45000,Proposal,Active,2025-10-19,2026-06-16
+CUST0086,Rohan Joshi,Evergreen Foods,Website,Rahul Menon,110000,Proposal,Inactive,2026-05-19,2026-06-06
+CUST0087,Kiran Menon,Horizon Mobility,Email Campaign,Sneha Iyer,155000,Negotiation,Inactive,2025-05-02,2026-07-02
+CUST0088,Meera Iyer,Keystone Digital,Referral,Sneha Iyer,405000,Qualified,Active,2026-08-26,2026-10-19
+CUST0089,Ananya Sharma,GreenLeaf Systems,Email Campaign,Arjun Das,60000,New Lead,Active,2026-11-08,2026-11-09
+CUST0090,Nisha Kapoor,BluePeak Solutions,Trade Show,Rahul Menon,465000,Qualified,Active,2026-09-01,2026-10-31
+CUST0091,Tara Reddy,Indigo Logistics,Referral,Arjun Das,140000,Won,Active,2025-09-28,2026-11-05
+CUST0092,Nisha Joshi,Lumina Healthcare,Cold Call,Sneha Iyer,120000,Won,Active,2025-06-02,2026-03-01
+CUST0093,Arjun Das,Indigo Logistics,Email Campaign,Karthik Nair,270000,Proposal,Active,2026-03-26,2026-04-26
+CUST0094,Arjun Sharma,BluePeak Solutions,Referral,Arjun Das,400000,Won,Inactive,2025-03-24,2025-05-03
+CUST0095,Arjun Joshi,Aster Technologies,Referral,Karthik Nair,445000,Lost,Follow-up Required,2026-08-13,2026-10-27
+CUST0096,Tara Kapoor,BluePeak Solutions,Email Campaign,Sneha Iyer,385000,Lost,Active,2026-06-16,2026-10-07
+CUST0097,Vivaan Menon,Lumina Healthcare,Email Campaign,Sneha Iyer,115000,Qualified,Active,2026-02-23,2026-08-12
+CUST0098,Ishaan Rao,Evergreen Foods,LinkedIn,Aditi Rao,305000,Won,Active,2026-11-10,2026-11-13
+CUST0099,Reyansh Menon,Aster Technologies,Referral,Priya Shah,360000,Won,Active,2026-02-18,2026-11-08
+CUST0100,Arjun Das,Crestline Retail,LinkedIn,Karthik Nair,145000,Negotiation,Inactive,2026-01-06,2026-09-18
