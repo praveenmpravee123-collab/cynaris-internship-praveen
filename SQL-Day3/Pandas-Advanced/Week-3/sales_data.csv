@@ -1,0 +1,17 @@
+
+Date,Region,Category,Sales,Profit
+2026-01-05,South,Electronics,15000,3000
+2026-01-10,North,Furniture,12000,2000
+2026-01-15,East,Clothing,8000,1500
+2026-02-02,West,Electronics,20000,4500
+2026-02-08,South,Furniture,10000,1800
+2026-02-14,North,Clothing,9000,1200
+2026-03-03,East,Electronics,18000,3500
+2026-03-09,West,Furniture,14000,2500
+2026-03-15,South,Clothing,11000,2200
+2026-03-20,North,Electronics,22000,5000
+2026-04-01,West,Clothing,7000,1000
+2026-04-10,East,Furniture,16000,3200
+2026-04-15,South,Electronics,25000,6000
+2026-04-20,North,Furniture,13000,2400
+2026-04-25,West,Electronics,19000,4000
