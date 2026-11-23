@@ -1,0 +1,48 @@
+{
+    "deal_stage": {
+        "labels": [
+            "Qualified",
+            "Won",
+            "Proposal",
+            "New Lead",
+            "Negotiation",
+            "Lost"
+        ],
+        "datasets": [
+            {
+                "label": "Customer Count",
+                "data": [
+                    28,
+                    22,
+                    15,
+                    14,
+                    11,
+                    10
+                ]
+            }
+        ]
+    },
+    "sales_performance": {
+        "labels": [
+            "Rahul Menon",
+            "Karthik Nair",
+            "Priya Shah",
+            "Sneha Iyer",
+            "Aditi Rao",
+            "Arjun Das"
+        ],
+        "datasets": [
+            {
+                "label": "Total Deal Value (INR)",
+                "data": [
+                    5215000,
+                    4840000,
+                    4830000,
+                    3640000,
+                    3485000,
+                    2865000
+                ]
+            }
+        ]
+    }
+}

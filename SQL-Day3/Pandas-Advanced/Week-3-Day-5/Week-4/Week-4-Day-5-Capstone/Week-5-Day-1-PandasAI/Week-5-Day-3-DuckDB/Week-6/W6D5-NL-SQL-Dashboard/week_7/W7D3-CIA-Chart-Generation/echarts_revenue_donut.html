@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ECharts Revenue Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="chart" style="width:100%;height:550px;"></div>
+
+    <script>
+        const chart = echarts.init(document.getElementById('chart'));
+
+        chart.setOption({
+            title: {
+                text: 'Monthly Revenue Distribution'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            series: [{
+                name: 'Revenue',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                data: [{"name": "January", "value": 120000}, {"name": "February", "value": 150000}, {"name": "March", "value": 135000}, {"name": "April", "value": 180000}, {"name": "May", "value": 200000}, {"name": "June", "value": 225000}],
+                label: {
+                    show: true,
+                    formatter: '{b}: {d}%'
+                }
+            }]
+        });
+
+        window.addEventListener('resize', () => chart.resize());
+    </script>
+</body>
+</html>
