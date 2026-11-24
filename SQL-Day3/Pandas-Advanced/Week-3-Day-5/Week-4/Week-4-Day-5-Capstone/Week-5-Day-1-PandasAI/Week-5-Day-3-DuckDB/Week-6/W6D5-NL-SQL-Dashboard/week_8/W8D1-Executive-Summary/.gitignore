@@ -1,0 +1,10 @@
+# API Keys
+.env
+.env.*
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/
