@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIA - CRM Analytics Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 25px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #243b55;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #64748b;
+      }
+
+      .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .card h2 {
+        font-size: 19px;
+        text-align: center;
+        color: #334155;
+      }
+
+      .upload-section,
+      .ai-section {
+        margin-top: 25px;
+        text-align: center;
+      }
+
+      input[type="file"] {
+        margin: 15px;
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        width: min(90%, 650px);
+        padding: 13px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      button:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      #uploadStatus {
+        color: #64748b;
+        margin-top: 15px;
+      }
+
+      .summary {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .summary-item {
+        background: white;
+        padding: 20px 35px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .summary-item h3 {
+        margin: 0 0 10px;
+        color: #64748b;
+      }
+
+      .summary-item p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #243b55;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .chart-container {
+        position: relative;
+        height: 350px;
+      }
+
+      #aiAnswer {
+        margin: 20px auto 0;
+        max-width: 800px;
+        padding: 18px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        text-align: left;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      #aiAnswer:empty {
+        display: none;
+      }
+
+      .error {
+        color: #dc2626;
+      }
+
+      .success {
+        color: #15803d;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>CIA - CRM Analytics Dashboard</h1>
+
+    <p class="subtitle">Customer Intelligence Analytics | W7D5</p>
+
+    <!-- CSV Upload Section -->
+    <div class="card upload-section">
+      <h2>Upload CRM Dataset</h2>
+
+      <input type="file" id="csvFile" accept=".csv,text/csv" />
+
+      <button type="button" id="uploadBtn">Upload CSV</button>
+
+      <p id="uploadStatus" role="status">Select a CSV file to begin.</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary">
+      <div class="summary-item">
+        <h3>Total Customers</h3>
+        <p id="totalCustomers">--</p>
+      </div>
+
+      <div class="summary-item">
+        <h3>Total Deal Value</h3>
+        <p id="totalDealValue">--</p>
+      </div>
+    </div>
+
+    <!-- AI Natural Language Query Section -->
+    <div class="card ai-section">
+      <h2>Ask CIA AI Data Analyst</h2>
+
+      <p>Ask questions about your uploaded CRM dataset.</p>
+
+      <input
+        type="text"
+        id="aiQuestion"
+        placeholder="e.g. How many customers are there?"
+      />
+
+      <button type="button" id="askBtn">Ask AI</button>
+
+      <div id="aiAnswer" role="status"></div>
+    </div>
+
+    <!-- Dashboard Charts -->
+    <div class="dashboard">
+      <div class="card">
+        <h2>Deal Stage Distribution</h2>
+
+        <div class="chart-container">
+          <canvas id="dealStageChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Sales Representative Performance</h2>
+
+        <div class="chart-container">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = "http://127.0.0.1:8002";
+
+      let dealStageChart = null;
+      let salesChart = null;
+      let datasetUploaded = false;
+
+      function renderCharts(charts) {
+        if (dealStageChart) {
+          dealStageChart.destroy();
+        }
+
+        if (salesChart) {
+          salesChart.destroy();
+        }
+
+        dealStageChart = new Chart(document.getElementById("dealStageChart"), {
+          type: "doughnut",
+          data: charts.deal_stage,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        });
+
+        salesChart = new Chart(document.getElementById("salesChart"), {
+          type: "bar",
+          data: charts.sales_performance,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Total Deal Value (INR)",
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // Load initial chart data
+      async function loadDashboard() {
+        try {
+          const response = await fetch("chart_data.json");
+
+          if (!response.ok) {
+            throw new Error("Chart data unavailable");
+          }
+
+          const data = await response.json();
+
+          renderCharts(data);
+
+          console.log("Dashboard loaded successfully");
+        } catch (error) {
+          console.error("Dashboard Error:", error);
+        }
+      }
+
+      // Upload CSV and refresh dashboard
+      async function uploadCSV() {
+        const fileInput = document.getElementById("csvFile");
+
+        const status = document.getElementById("uploadStatus");
+
+        const button = document.getElementById("uploadBtn");
+
+        if (!fileInput.files.length) {
+          status.textContent = "Please select a CSV file.";
+          status.className = "error";
+          return;
+        }
+
+        const file = fileInput.files[0];
+
+        if (!file.name.toLowerCase().endsWith(".csv")) {
+          status.textContent = "Only CSV files are supported.";
+          status.className = "error";
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        button.disabled = true;
+        status.className = "";
+        status.textContent = "Uploading CSV...";
+
+        try {
+          const response = await fetch(API_URL + "/cia/upload-csv", {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(
+              typeof result.detail === "string"
+                ? result.detail
+                : "Upload failed",
+            );
+          }
+
+          document.getElementById("totalCustomers").textContent = result.rows;
+
+          document.getElementById("totalDealValue").textContent =
+            "₹" + result.total_deal_value.toLocaleString("en-IN");
+
+          renderCharts(result.charts);
+
+          datasetUploaded = true;
+
+          document.getElementById("aiAnswer").textContent = "";
+
+          status.className = "success";
+          status.textContent =
+            "CSV uploaded successfully: " +
+            result.filename +
+            " | Rows: " +
+            result.rows;
+        } catch (error) {
+          status.className = "error";
+          status.textContent = "Upload Error: " + error.message;
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      // Ask PandasAI a natural language question
+      async function askAI() {
+        const questionInput = document.getElementById("aiQuestion");
+
+        const answerBox = document.getElementById("aiAnswer");
+
+        const button = document.getElementById("askBtn");
+
+        const question = questionInput.value.trim();
+
+        if (!question) {
+          answerBox.textContent = "Please enter a question.";
+          return;
+        }
+
+        if (!datasetUploaded) {
+          answerBox.textContent = "Please upload a CSV file first.";
+          return;
+        }
+
+        button.disabled = true;
+        answerBox.className = "";
+        answerBox.textContent = "CIA AI is analyzing your data. Please wait...";
+
+        try {
+          const response = await fetch(API_URL + "/cia/query", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              question: question,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(
+              typeof result.detail === "string"
+                ? result.detail
+                : "AI query failed",
+            );
+          }
+
+          const answer = result.answer;
+
+          answerBox.className = "success";
+
+          answerBox.textContent =
+            typeof answer === "object"
+              ? JSON.stringify(answer, null, 2)
+              : String(answer);
+        } catch (error) {
+          answerBox.className = "error";
+          answerBox.textContent = "AI Query Error: " + error.message;
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      document.getElementById("uploadBtn").addEventListener("click", uploadCSV);
+
+      document.getElementById("askBtn").addEventListener("click", askAI);
+
+      document
+        .getElementById("aiQuestion")
+        .addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            askAI();
+          }
+        });
+
+      loadDashboard();
+    </script>
+  </body>
+</html>
