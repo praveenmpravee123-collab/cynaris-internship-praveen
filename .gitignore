@@ -1,0 +1,8 @@
+.venv/
+.venv_w5d2/
+__pycache__/
+.ipynb_checkpoints/
+AutoViz_Plots/
+
+# Vanna generated query results
+**/6142f7d82a095c76/
