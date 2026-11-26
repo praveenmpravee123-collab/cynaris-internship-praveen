@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas==2.3.3
+numpy==1.26.4
+groq
+python-dotenv
+python-multipart
+python-pptx==1.0.2
+pydantic
