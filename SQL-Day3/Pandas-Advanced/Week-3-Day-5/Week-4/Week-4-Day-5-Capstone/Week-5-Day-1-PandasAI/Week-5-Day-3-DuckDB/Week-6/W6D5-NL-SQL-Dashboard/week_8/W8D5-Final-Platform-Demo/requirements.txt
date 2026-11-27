@@ -1,0 +1,12 @@
+fastapi==0.162.4
+uvicorn==0.54.0
+pandas==2.3.3
+numpy==1.26.4
+pandasai==3.0.0
+pandasai-litellm==0.0.1
+litellm==1.106.6
+groq==1.7.0
+python-dotenv==1.2.4
+python-multipart==0.0.34
+python-pptx==1.0.2
+pydantic==2.14.2
