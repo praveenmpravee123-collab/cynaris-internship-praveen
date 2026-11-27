@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CIA - CRM Analytics Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 25px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #243b55;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #64748b;
+      }
+
+      .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .card h2 {
+        font-size: 19px;
+        text-align: center;
+        color: #334155;
+      }
+
+      .upload-section,
+      .ai-section {
+        margin-top: 25px;
+        text-align: center;
+      }
+
+      input[type="file"] {
+        margin: 15px;
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        width: min(90%, 650px);
+        padding: 13px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      button:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      #uploadStatus,
+      #reportStatus {
+        margin-top: 15px;
+      }
+
+      .summary {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .summary-item {
+        background: white;
+        padding: 20px 35px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .summary-item h3 {
+        margin: 0 0 10px;
+        color: #64748b;
+      }
+
+      .summary-item p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #243b55;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .chart-container {
+        position: relative;
+        height: 350px;
+      }
+
+      #aiAnswer,
+      #reportOutput {
+        margin: 20px auto 0;
+        max-width: 1000px;
+        padding: 18px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        text-align: left;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      #aiAnswer:empty,
+      #reportOutput:empty {
+        display: none;
+      }
+
+      .error {
+        color: #dc2626;
+      }
+
+      .success {
+        color: #15803d;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #64748b;
+        font-size: 14px;
+      }
+
+      .footer a {
+        color: #2563eb;
+        text-decoration: none;
+        margin: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>CIA - CRM Analytics Dashboard</h1>
+
+    <p class="subtitle">
+      Customer Intelligence Analytics | W8D4 Production Deployment
+    </p>
+
+    <!-- CSV Upload Section -->
+
+    <div class="card upload-section">
+      <h2>Upload CRM Dataset</h2>
+
+      <input type="file" id="csvFile" accept=".csv,text/csv" />
+
+      <button type="button" id="uploadBtn">Upload CSV</button>
+
+      <p id="uploadStatus" role="status">Select a CSV file to begin.</p>
+    </div>
+
+    <!-- Summary Cards -->
+
+    <div class="summary">
+      <div class="summary-item">
+        <h3>Total Customers</h3>
+        <p id="totalCustomers">--</p>
+      </div>
+
+      <div class="summary-item">
+        <h3>Total Deal Value</h3>
+        <p id="totalDealValue">--</p>
+      </div>
+    </div>
+
+    <!-- Dashboard Charts -->
+
+    <div class="dashboard">
+      <div class="card">
+        <h2>Deal Stage Distribution</h2>
+
+        <div class="chart-container">
+          <canvas id="dealStageChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Sales Representative Performance</h2>
+
+        <div class="chart-container">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Natural Language Query -->
+
+    <div class="card ai-section">
+      <h2>Ask CIA AI Data Analyst</h2>
+
+      <p>Ask questions about your uploaded CRM dataset.</p>
+
+      <input
+        type="text"
+        id="aiQuestion"
+        placeholder="e.g. How many customers are there?"
+      />
+
+      <button type="button" id="askBtn" disabled>Ask AI</button>
+
+      <div id="aiAnswer" role="status"></div>
+    </div>
+
+    <!-- Business Analytics and Report Export -->
+
+    <div class="card ai-section">
+      <h2>Business Analytics & Report Export</h2>
+
+      <p>Generate insights and download business reports.</p>
+
+      <button type="button" id="edaBtn" disabled>Generate EDA</button>
+
+      <button type="button" id="summaryBtn" disabled>
+        Generate Executive Summary
+      </button>
+
+      <button type="button" id="pptBtn" disabled>Download PPT Report</button>
+
+      <p id="reportStatus" role="status"></p>
+
+      <pre id="reportOutput"></pre>
+    </div>
+
+    <!-- API Documentation -->
+
+    <div class="footer">
+      <p>CIA Full Feature API | Version 1.6.0</p>
+
+      <a href="/docs" target="_blank" rel="noopener">
+        Swagger API Documentation
+      </a>
+
+      <a href="/redoc" target="_blank" rel="noopener"> ReDoc Documentation </a>
+
+      <a href="/" target="_blank" rel="noopener"> API Health Check </a>
+    </div>
+
+    <script>
+      // Automatic API URL configuration
+
+      const API_URL = window.location.origin;
+
+      let dealStageChart = null;
+      let salesChart = null;
+
+      let datasetUploaded = false;
+      let summaryGenerated = false;
+      let busy = false;
+
+      const getElement = (id) => document.getElementById(id);
+
+      // Update button availability
+
+      function updateButtons() {
+        getElement("uploadBtn").disabled = busy;
+
+        getElement("askBtn").disabled = busy || !datasetUploaded;
+
+        getElement("edaBtn").disabled = busy || !datasetUploaded;
+
+        getElement("summaryBtn").disabled = busy || !datasetUploaded;
+
+        getElement("pptBtn").disabled = busy || !summaryGenerated;
+      }
+
+      function setBusy(value) {
+        busy = value;
+        updateButtons();
+      }
+
+      // API response validation
+
+      async function readJSON(response) {
+        const result = await response.json();
+
+        if (!response.ok || result.success === false) {
+          throw new Error(
+            typeof result.detail === "string"
+              ? result.detail
+              : "Request failed: HTTP " + response.status,
+          );
+        }
+
+        return result;
+      }
+
+      // Report status helper
+
+      function setReportStatus(message, className = "") {
+        const status = getElement("reportStatus");
+
+        status.textContent = message;
+        status.className = className;
+      }
+
+      // Render dashboard charts
+
+      function renderCharts(charts) {
+        if (dealStageChart) {
+          dealStageChart.destroy();
+        }
+
+        if (salesChart) {
+          salesChart.destroy();
+        }
+
+        dealStageChart = new Chart(getElement("dealStageChart"), {
+          type: "doughnut",
+          data: charts.deal_stage,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        });
+
+        salesChart = new Chart(getElement("salesChart"), {
+          type: "bar",
+          data: charts.sales_performance,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Total Deal Value (INR)",
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // Upload CSV dataset
+
+      async function uploadCSV() {
+        if (busy) return;
+
+        const fileInput = getElement("csvFile");
+        const status = getElement("uploadStatus");
+
+        if (!fileInput.files.length) {
+          status.textContent = "Please select a CSV file.";
+          status.className = "error";
+          return;
+        }
+
+        const file = fileInput.files[0];
+
+        if (!file.name.toLowerCase().endsWith(".csv")) {
+          status.textContent = "Only CSV files are supported.";
+          status.className = "error";
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          status.textContent = "CSV exceeds the 5 MB limit.";
+          status.className = "error";
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        setBusy(true);
+
+        status.className = "";
+        status.textContent = "Uploading CSV...";
+
+        try {
+          const response = await fetch(API_URL + "/cia/upload-csv", {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await readJSON(response);
+
+          datasetUploaded = true;
+          summaryGenerated = false;
+
+          getElement("totalCustomers").textContent = result.rows;
+
+          getElement("totalDealValue").textContent =
+            "₹" + result.total_deal_value.toLocaleString("en-IN");
+
+          getElement("aiAnswer").textContent = "";
+          getElement("reportOutput").textContent = "";
+          getElement("reportStatus").textContent = "";
+
+          renderCharts(result.charts);
+
+          status.className = "success";
+
+          status.textContent =
+            "CSV uploaded successfully: " +
+            result.filename +
+            " | Rows: " +
+            result.rows;
+        } catch (error) {
+          status.className = "error";
+
+          status.textContent = "Upload Error: " + error.message;
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      // PandasAI natural language query
+
+      async function askAI() {
+        if (busy) return;
+
+        const question = getElement("aiQuestion").value.trim();
+
+        const answerBox = getElement("aiAnswer");
+
+        if (!question) {
+          answerBox.textContent = "Please enter a question.";
+          return;
+        }
+
+        if (!datasetUploaded) {
+          answerBox.textContent = "Please upload a CSV file first.";
+          return;
+        }
+
+        setBusy(true);
+
+        answerBox.className = "";
+
+        answerBox.textContent = "CIA AI is analyzing your data. Please wait...";
+
+        try {
+          const response = await fetch(API_URL + "/cia/query", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              question: question,
+            }),
+          });
+
+          const result = await readJSON(response);
+
+          answerBox.className = "success";
+
+          answerBox.textContent =
+            typeof result.answer === "object"
+              ? JSON.stringify(result.answer, null, 2)
+              : String(result.answer);
+        } catch (error) {
+          answerBox.className = "error";
+
+          answerBox.textContent = "AI Query Error: " + error.message;
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      // Generate EDA
+
+      async function generateEDA() {
+        if (busy || !datasetUploaded) return;
+
+        setBusy(true);
+
+        setReportStatus("Generating EDA report...");
+
+        getElement("reportOutput").textContent = "";
+
+        try {
+          const response = await fetch(API_URL + "/cia/eda");
+
+          const result = await readJSON(response);
+
+          getElement("reportOutput").textContent = JSON.stringify(
+            result,
+            null,
+            2,
+          );
+
+          setReportStatus("EDA generated successfully.", "success");
+        } catch (error) {
+          setReportStatus("EDA Error: " + error.message, "error");
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      // Generate Groq executive summary
+
+      async function generateSummary() {
+        if (busy || !datasetUploaded) return;
+
+        setBusy(true);
+
+        setReportStatus("Generating AI executive summary. Please wait...");
+
+        getElement("reportOutput").textContent = "";
+
+        try {
+          const response = await fetch(API_URL + "/cia/executive-summary", {
+            method: "POST",
+          });
+
+          const result = await readJSON(response);
+
+          getElement("reportOutput").textContent = result.executive_summary;
+
+          summaryGenerated = true;
+
+          setReportStatus(
+            "Executive summary generated successfully. " +
+              "Word count: " +
+              result.word_count,
+            "success",
+          );
+        } catch (error) {
+          setReportStatus("Summary Error: " + error.message, "error");
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      // Download PowerPoint report
+
+      async function downloadPPT() {
+        if (busy || !summaryGenerated) return;
+
+        setBusy(true);
+
+        setReportStatus("Generating PowerPoint report...");
+
+        try {
+          const response = await fetch(API_URL + "/cia/export-ppt", {
+            method: "POST",
+          });
+
+          if (!response.ok) {
+            await readJSON(response);
+
+            throw new Error("PPT export failed.");
+          }
+
+          const blob = await response.blob();
+
+          const downloadURL = URL.createObjectURL(blob);
+
+          const link = document.createElement("a");
+
+          link.href = downloadURL;
+
+          link.download = "CIA_CRM_Executive_Report.pptx";
+
+          document.body.appendChild(link);
+
+          link.click();
+
+          link.remove();
+
+          setTimeout(() => URL.revokeObjectURL(downloadURL), 1000);
+
+          setReportStatus("PowerPoint report download started.", "success");
+        } catch (error) {
+          setReportStatus("PPT Export Error: " + error.message, "error");
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      // Event listeners
+
+      getElement("uploadBtn").addEventListener("click", uploadCSV);
+
+      getElement("askBtn").addEventListener("click", askAI);
+
+      getElement("edaBtn").addEventListener("click", generateEDA);
+
+      getElement("summaryBtn").addEventListener("click", generateSummary);
+
+      getElement("pptBtn").addEventListener("click", downloadPPT);
+
+      getElement("aiQuestion").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          askAI();
+        }
+      });
+
+      updateButtons();
+    </script>
+  </body>
+</html>
